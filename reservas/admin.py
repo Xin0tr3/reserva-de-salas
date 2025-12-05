@@ -22,7 +22,7 @@ class ReservasAdmin(admin.ModelAdmin):
     list_display = (
         'nombre_reservante',
         'sala_reservada',
-        'fecha_reserva',
+        'hora_inicio',
         'rut',
         'estado_reserva',
         'codigo'

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -139,4 +140,13 @@ REST_FRAMEWORK = {
         # Permite acceso total solo a usuarios autenticados
         'rest_framework.permissions.IsAuthenticated',
     )
+}
+
+SIMPLE_JWT = {
+    #Tiempo que dura el token de acceso
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    #Tiempo que dura el token de refresco
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    #Permite enviar el token de refresco en la misma peticion de login
+    "ROTATE_REFRESH_TOKENS": True,
 }

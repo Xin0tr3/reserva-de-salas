@@ -2,11 +2,13 @@ from ..models import Salas, Reservas
 from .serializers import SalaSerializer, ReservaSerializer
 from datetime import datetime
 from django.db.models import Q
-from rest_framework import status, generics
+from rest_framework import status, generics, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 class SalaListCreateAPIView(generics.ListCreateAPIView):
+    permission_classes = [permissions.AllowAny]
     serializer_class = SalaSerializer
     queryset = Salas.objects.all()
 
@@ -35,3 +37,19 @@ class SalaListCreateAPIView(generics.ListCreateAPIView):
         salas_disponibles = Salas.objects.exclude(id__in=reservas_solapadas)
 
         return salas_disponibles
+    
+class ReservaCreateAPIView(generics.CreateAPIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class=ReservaSerializer
+    queryset = Reservas.objects.all()
+
+class ReservaListaAdminAPIView(generics.ListAPIView):
+    serializer_class = ReservaSerializer
+    permission_classes = [IsAuthenticated, IsAdminUser]
+    queryset = Reservas.objects.all().order_by('-hora_inicio')
+
+class ReservaDetallesAdminAPIView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated, IsAdminUser]
+    serializer_class = ReservaSerializer
+    queryset=Reservas.objects.all()
+    lookup_field = 'codigo'
