@@ -43,7 +43,7 @@ class SalaDisponiblesAPIView(generics.ListAPIView):
 class SalasCreacionAPIView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated, IsAdminUser]
     serializer_class = SalaSerializer
-    queryset = Salas.objects.all().order_by('nombre')
+    queryset = Salas.objects.all().order_by('nombre_sala')
 
 class SalasModificacionELiminacionAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated, IsAdminUser]
@@ -67,22 +67,4 @@ class ReservaDetallesAdminAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset=Reservas.objects.all()
     lookup_field = 'codigo'
 
-def gestionar_reserva(request, codigo, accion):
 
-    reserva = get_object_or_404(Reservas, codigo=codigo)
-
-    if accion.lower() == 'confirmada':
-        reserva.estado_reserva = 'CONFIRMADA'
-        mensaje = "Reserva confirmada exitosamente"
-
-    elif accion.lower() == 'cancelada':
-        reserva.estado_reserva = 'CANCELADA'
-        mensaje = "Reserva cancelada con exito"
-
-    else :
-        return HttpResponse("Accion no valida", status=400)
-    
-    reserva.save()
-
-    context = {'reserva': reserva, 'mensaje': mensaje}
-    return render(request, 'reservas/gestion_exitosa.html', context)
