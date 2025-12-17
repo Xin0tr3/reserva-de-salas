@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'reservas',
     'rest_framework',
     'rest_framework_simplejwt',
+    'drf_spectacular'
 
 ]
 
@@ -140,7 +141,16 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         # Permite acceso total solo a usuarios autenticados
         'rest_framework.permissions.IsAuthenticated',
-    )
+    ),
+
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'API de Gestión de Reservas UTEM',
+    'DESCRIPTION': 'Endpoints para gestionar salas y reservas. Este es el backend del sistema.',
+    'VERSION' : '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
 }
 
 SIMPLE_JWT = {
