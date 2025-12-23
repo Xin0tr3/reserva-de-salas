@@ -30,12 +30,11 @@ def EnviarEmailConfirmacion (reserva):
         mensaje,
         settings.DEFAULT_FROM_EMAIL,
         [reserva.email],
-        fail_silently=False,
     )
 
     email.attach('tu-reserva.ics', calendario, 'text/calendar')
 
-    email.send()
+    email.send(fail_silently=False)
 
 def ImportarCalendarioICalendar(reserva):
 

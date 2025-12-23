@@ -2,7 +2,7 @@ from rest_framework import serializers
 from ..models import Salas, Reservas
 from django.db.models import Q
 from ..emails import EnviarEmailConfirmacion
-from ..task import CalendarioGoogleReservas
+from ..task import CalendarioGoogleReservas, Registrar_en_google_calendar_task
 import secrets
 
 class SalaSerializer(serializers.ModelSerializer):
@@ -52,5 +52,8 @@ class ReservaSerializer(serializers.ModelSerializer):
 
         EnviarEmailConfirmacion(reserva)
 
-        CalendarioGoogleReservas.delay(reserva.id)
+        #CalendarioGoogleReservas.delay(reserva.id)
+        CalendarioGoogleReservas(reserva.id)
+
+        Registrar_en_google_calendar_task(reserva.id)
         return reserva
