@@ -1,4 +1,4 @@
-from ..models import Salas, Reservas
+from ..models import Salas, Reservas, Invitados
 from .serializers import SalaSerializer, ReservaSerializer
 from datetime import datetime
 from django.db.models import Q
@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
+from openpyxl import Workbook
 
 class SalaDisponiblesAPIView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
@@ -31,7 +32,7 @@ class SalaDisponiblesAPIView(generics.ListAPIView):
             return Salas.objects.none()
     
         reservas_solapadas = Reservas.objects.filter(
-        Q(estado='CONFIRMADA') | Q(estado='PENDIENTE')
+        Q(estado_reserva='CONFIRMADA') | Q(estado_reserva='PENDIENTE')
         ).filter(
         Q(hora_inicio__lt = termino_solicitado) & Q(hora_termino__gt = inicio_solicitado)
         ).values_list('sala_reservada_id', flat=True)
@@ -67,4 +68,48 @@ class ReservaDetallesAdminAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset=Reservas.objects.all()
     lookup_field = 'codigo'
 
+class ExportarInvitadosAPIView(APIView):
+    """
+    Endpoint para que el administrador descargue la lista de invitados en Excel.
+    """
+    permission_classes = [IsAdminUser]
 
+    def get(self, request, reserva_id):
+        # 1. Obtenemos la reserva o lanzamos 404 si no existe
+        reserva = get_object_or_404(Reservas, id=reserva_id)
+        
+        # 2. Filtramos los invitados asociados a esa reserva
+        invitados_r = Invitados.objects.filter(codigo_reserva=reserva)
+
+        # 3. Inicializamos el libro de Excel
+        wb = Workbook()
+        ws = wb.active
+        ws.title = "Lista de Invitados"
+
+        # 4. Definimos y agregamos los encabezados
+        header = ['Nombre Invitado', 'Apellidos Invitados', 'Rol', 'Carrera', 'Facultad', 'Sexo', 'Código Reserva']
+        ws.append(['Invitados del evento: ', reserva.nombre_evento])
+        ws.append(['Sala: ', reserva.sala_reservada.nombre_sala])
+        ws.append([]) # Espacio visual
+        ws.append(header)
+
+        # 5. Agregamos los datos de cada invitado
+        for invitado in invitados_r:
+            ws.append([
+                invitado.nombre_invitado,
+                invitado.apellidos_invitado,
+                invitado.get_rol_display(), # Muestra el texto legible del Choice
+                invitado.carrera,
+                invitado.facultad,
+                invitado.get_sexo_display(),
+                reserva.codigo # El código único de la reserva
+            ])
+
+        # 6. Preparamos la respuesta HTTP para descargar el archivo .xlsx
+        response = HttpResponse(
+            content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        )
+        response['Content-Disposition'] = f'attachment; filename="invitados_{reserva.codigo}.xlsx"'
+
+        wb.save(response)
+        return response

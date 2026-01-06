@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'reservas',
     'rest_framework',
     'rest_framework_simplejwt',
-    'drf_spectacular'
-
+    'drf_spectacular',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'reservaSalas.urls'
@@ -168,4 +169,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
-   
+
+#CORS
+CORS_ALLOW_ALL_ORIGINS = True
