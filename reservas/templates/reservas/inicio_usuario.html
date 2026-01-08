@@ -15,7 +15,22 @@
 
 <nav>
     <ul>
-        <li> <a class="admin" href="#section1">Administrador</a> </li>
+        <li class="esconder"> <a href="#"
+                rel="noopener noreferrer" target="_blank">Administrador</a>
+        <li class="menu" onclick=mostrarBarra()> <svg xmlns="http://www.w3.org/2000/svg" height="48px"
+                viewBox="0 -960 960 960" width="48px" fill="#e3e3e3">
+                <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+            </svg> </li>
+    </ul>
+
+    <ul class="barra">
+        <li onclick=esconderBarra()> <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960"
+                width="48px" fill="#e3e3e3">
+                <path
+                    d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+            </svg></li>
+        <li> <a href="#" rel="noopener noreferrer"
+                target="_blank">Administrador</a> </li>
     </ul>
 </nav>
 
@@ -28,5 +43,17 @@
     </section>
 </body>
     
+
+<script>
+    function mostrarBarra() {
+        const barra = document.querySelector('.barra');
+        barra.style.display = 'flex';
+    }
+
+    function esconderBarra() {
+        const barra = document.querySelector('.barra');
+        barra.style.display = 'none';
+    }
+</script>
 
 </html>

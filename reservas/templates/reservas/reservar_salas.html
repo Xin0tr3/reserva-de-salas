@@ -15,25 +15,86 @@
 
 <nav>
     <ul>
-        <li> <a class="admin" href="#section1">Administrador</a> </li>
+        <li class="esconder"> <a href="#"
+                rel="noopener noreferrer" target="_blank">Administrador</a>
+        <li class="menu" onclick=mostrarBarra()> <svg xmlns="http://www.w3.org/2000/svg" height="48px"
+                viewBox="0 -960 960 960" width="48px" fill="#e3e3e3">
+                <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+            </svg> </li>
+    </ul>
+
+    <ul class="barra">
+        <li onclick=esconderBarra()> <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960"
+                width="48px" fill="#e3e3e3">
+                <path
+                    d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+            </svg></li>
+        <li> <a href="#" rel="noopener noreferrer"
+                target="_blank">Administrador</a> </li>
     </ul>
 </nav>
 
 <body>
-    <section class="botones">
-        <div class="botones-inicio">
+    <div>
+        <!-- Seleccionar sala -->
+        <section id="paso-1">
+
+        </section>
+        <section class="botones">
+            <div class="botones-inicio">
+                <a href="#" class="btn-1"> Sala </a>
+                <a href="#" class="btn-1"> Sala </a>
+                <a href="#" class="btn-1"> Sala </a>
+            </div>
+        </section>
+        <section class="botones">
+            <div class="botones-inicio">
             <a href="#" class="btn-1"> Sala </a>
             <a href="#" class="btn-1"> Sala </a>
             <a href="#" class="btn-1"> Sala </a>
-        </div>
-    </section>
-    <section class="botones">
-        <div class="botones-inicio">
-            <a href="#" class="btn-1"> Sala </a>
-            <a href="#" class="btn-1"> Sala </a>
-            <a href="#" class="btn-1"> Sala </a>
-        </div>
-    </section>
+            </div>
+        </section>
+
+        <!-- Seleccionar fecha y hora -->
+        <section id="paso-2" class="oculto">
+            <h3>Selecciona fecha y hora</h3>
+        </section>
+
+        <!-- Ingresar datos de la reserva -->
+        <section id="paso-3" class="oculto">
+            <h3>Ingresa los datos de tu reserva</h3>
+            <label for="tevento">Titulo evento:</label><br>
+            <input type="text" id="tevento" name="tevento" placeholder="Titulo de tu evento"><br>
+            <label for="devento">Descripcion evento:</label><br>
+            <input type="text" id="devento" name="devento" placeholder="Describe el evento"><br>
+            <label for="nusuario">Nombre de quien reserva:</label><br>
+            <input type="text" id="nusuario" name="tevento" placeholder="Titulo"><br>
+            <label for="depto">Departamento:</label><br>
+            <input type="text" id="depto" name="tevento" placeholder="Departamento"><br>
+            <label for="correo">Correo:</label><br>
+            <input type="email" id="correo" name="correo" placeholder="Tu correo"><br>
+            <label for="equip">Equipamiento extra:</label><br>
+            <input type="text" id="equip" name="equip" placeholder="Equipamiento"><br>
+            <label for="equip">Rut:</label><br>
+            <input type="text" id="rut" name="rut" placeholder="XX-XXX-XXX-X"><br>
+            
+            <div id="contenedor-invitados">
+
+            </div>
+
+            <button type="button" id="volver-paso-2">Volver</button>
+            <button type="button" id="ir-paso-4">Seguir</button>
+        </section>
+
+        <!-- Confirmar reserva -->
+        <section id="paso-4" class="oculto">
+            <h3>¿Confirmas la reserva?</h3>
+            <button type="button" id="volver-paso-2">Volver</button>
+            <button type="button" id="ir-paso-4">Confirmar</button>
+        </section>
+
+    </div>
+
 </body>
     
 
