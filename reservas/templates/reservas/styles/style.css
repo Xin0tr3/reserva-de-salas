@@ -1,0 +1,115 @@
+/*Botones*/
+.botones {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.botones-inicio {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.link-imagen{
+    position: relative;
+    width: 220px;
+    height: auto;
+    display: block;
+    text-decoration: none;
+}
+
+.otto-g, .otto-f, .capsulas, .portafolio{
+    border-radius: 20px;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.otto-g img, .otto-f img, .capsulas img, .portafolio img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.texto-boton {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(29, 76, 150, 0.4);
+    color: white;
+    text-align: center;
+    padding: 0 30px 145px 0;
+    font-weight: bold;
+    font-size: 30px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.texto-boton-grande {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(29, 76, 150, 0.4);
+    color: white;
+    text-align: left;
+    padding: 0 0 100px 10px;
+    font-weight: bold;
+    font-size: 30px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Inicio Navbar */
+nav{
+    background-color: #1d4c96;
+}
+
+nav ul{
+    list-style: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+nav li{
+    height: 50px;
+    align-items: center;
+}
+
+nav a{
+    text-decoration: none;
+    color:white;
+    align-items: center;
+    display: flex;
+    height: 100%;
+    padding: 0 50px;
+    border-right: 0.5px solid white;
+    border-left: 0.5px solid white;
+    text-align: center;
+}
+
+nav a:hover{
+    color: white;
+    text-decoration: none;
+}
