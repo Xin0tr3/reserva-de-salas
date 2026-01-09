@@ -11,9 +11,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 
-<nav>
+<body>
+    <nav>
     <ul>
         <li class="esconder"> <a href="#"
                 rel="noopener noreferrer" target="_blank">Administrador</a>
@@ -32,32 +35,42 @@
         <li> <a href="#" rel="noopener noreferrer"
                 target="_blank">Administrador</a> </li>
     </ul>
-</nav>
-
-<body>
-    <div>
+    </nav>
+    <div class="contenedor-principal">
         <!-- Seleccionar sala -->
-        <section id="paso-1">
-
-        </section>
-        <section class="botones">
-            <div class="botones-inicio">
-                <a href="#" class="btn-1"> Sala </a>
-                <a href="#" class="btn-1"> Sala </a>
-                <a href="#" class="btn-1"> Sala </a>
-            </div>
-        </section>
-        <section class="botones">
-            <div class="botones-inicio">
-            <a href="#" class="btn-1"> Sala </a>
-            <a href="#" class="btn-1"> Sala </a>
-            <a href="#" class="btn-1"> Sala </a>
+        <section id="paso-1" class="paso-activo">
+            <h2>Selecciona una sala</h2>
+            <div id="contenedor-salas" class="botones">
+                <div class="botones-inicio" id="salas-grid">
+                    <!-- Las salas se cargarán aquí dinámicamente -->
+                </div>
             </div>
         </section>
 
         <!-- Seleccionar fecha y hora -->
         <section id="paso-2" class="oculto">
             <h3>Selecciona fecha y hora</h3>
+            
+            <div id="info-sala" class="info-sala">
+                <p><strong>Sala seleccionada: </strong> <span id="nombre-sala-seleccionada">-</span></p>
+                <p><strong>Capacidad máxima: </strong><span id="capacidad-sala-seleccionada">-</span> personas</p>
+                <p><strong>Horario disponible: </strong><span id="Horario-sala">-</span></p>
+            </div>
+            <label for="fecha-inicio">Fecha y hora de inicio:</label><br>
+            <input id="fecha-inicio" type="text" data-id="minMaxTime" placeholder="Seleccione fecha y hora" readonly><br>
+
+            <label for="fecha-termino">Fecha y hora de término:</label><br>
+            <input id="fecha-termino" type="text" data-id="minMaxTime" placeholder="Seleccione fecha y hora" readonly><br>
+            
+            <div id="horas-disponibles" style="margin-bottom: 20px;">
+                <!-- Se rellena automaticamente -->
+            </div>
+            
+            <div class="botones-navegacion">
+                <button type="button" id="volver-paso-1" class="btn-volver">Volver</button>
+                <button type="button" id="siguiente-paso-2" class="btn-siguiente">Siguiente</button>
+            </div>
+
         </section>
 
         <!-- Ingresar datos de la reserva -->
@@ -78,24 +91,43 @@
             <label for="equip">Rut:</label><br>
             <input type="text" id="rut" name="rut" placeholder="XX-XXX-XXX-X"><br>
             
-            <div id="contenedor-invitados">
+            <h3>Invitados</h3>
+            <div id="info-invitados">
+                <!-- Se tiene que agregar capacidad dinamica según sala -->
+                <p>Capacidad disponible: <span id="capacidad-restante">X</span>personas</p>
 
             </div>
 
-            <button type="button" id="volver-paso-2">Volver</button>
-            <button type="button" id="ir-paso-4">Seguir</button>
+            <div id="contenedor-invitados">
+                <!-- Se rellena solo -->
+            </div>
+            <button type="button" id="agregar-invitado" class="btn-agregar-invitado">Agregar invitado</button>
+
+            <div class="botones-navegacion">
+                <button type="button" id="volver-paso-2" class="btn-volver">Volver</button>
+                <button type="button" id="siguiente-paso-3" class="btn-siguiente">Siguiente</button>
+            </div>
         </section>
 
         <!-- Confirmar reserva -->
         <section id="paso-4" class="oculto">
             <h3>¿Confirmas la reserva?</h3>
-            <button type="button" id="volver-paso-2">Volver</button>
-            <button type="button" id="ir-paso-4">Confirmar</button>
-        </section>
+            <div id="resumen-reserva">
+                <!-- Se rellena automaticamente -->
+            </div>
 
+            <div class="botones-navegacion">
+                <button type="button" id="volver-paso-3" class="btn-volver">Volver</button>
+                <button type="button" id="confirmar-reserva" class="btn-confirmar">Confirmar reserva</button>
+            </div>
+        </section>
     </div>
 
 </body>
-    
+
+<script>
+
+</script>
 
 </html>
+
