@@ -57,6 +57,12 @@ class ReservaCreateAPIView(generics.CreateAPIView):
     serializer_class=ReservaSerializer
     queryset = Reservas.objects.all()
 
+class ReservaRetrieveDeleteAPIView(generics.RetrieveDestroyAPIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = ReservaSerializer
+    queryset = Reservas.objects.all()
+    lookup_field = 'codigo'
+
 class ReservaListaAdminAPIView(generics.ListAPIView):
     serializer_class = ReservaSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]

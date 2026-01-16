@@ -1,9 +1,26 @@
+/* Variables colores */
+:root {
+    --color-primario: #071B34;
+    --color-secundario: #0A3C66;
+    --color-exito: #4CAF50;
+    --color-error: #f44336;
+    --color-advertencia: #ff9800;
+    --color-texto: #333333;
+    --color-fondo: #F5F5F5;
+}
+/* Fin Variables */
+
+/* ///////////////////////////////////////// */
+/*              Diseño general               */
+/* ///////////////////////////////////////// */
+
 body {
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-
+    margin: 0;
 }
+
 
 /*Botones*/
 .botones {
@@ -30,7 +47,7 @@ body {
 
 .btn-1 { 
     padding: 10px;
-    background-color: #071B34;
+    background-color: var(--color-primario);
     border-radius: 10px;
 }
 
@@ -38,7 +55,7 @@ body {
 
 /* Inicio Navbar */
 nav{
-background-color: #071B34;
+background-color: var(--color-primario);
 position: sticky;
 top: 0;
 z-index: 100;
@@ -131,7 +148,7 @@ right:0;
 height:100vh;
 width:200px;
 z-index:1000;
-background-color:#071B34;
+background-color:var(--color-primario);
 justify-content: flex-start;
 display: none;
 align-items: flex-start;
@@ -180,3 +197,323 @@ nav a.izq, nav a.der, nav a{
 border: none !important;
 }
 }
+
+/* ///////////////////////////////////////// */
+/*             Fin diseño general            */
+/* ///////////////////////////////////////// */
+
+
+
+/* ///////////////////////////////////////// */
+/*   Seccion diseños del apartado Reservas   */
+/* ///////////////////////////////////////// */
+
+/* Pasos */
+.paso {
+    padding: 40px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.paso.oculto {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.paso.activa {
+    opacity: 1;
+    visibility: visible;
+}
+/* Fin pasos */
+
+/* Salas */
+.sala-btn {
+    padding: 15px !important;
+    background-color: var(--color-secundario) !important;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.sala-btn:hover {
+    background-color: var(--color-primario) !important;
+    transform: scale(1.05);
+}
+
+.sala-btn.seleccionado {
+    border: 2px solid var(--color-exito) !important;
+    background-color: var(--color-primario) !important;
+}
+
+.sala-info {
+    text-align: center;
+}
+
+/* Fin salas */
+
+/* Info sala */
+.info-sala{
+    background: var(--color-fondo);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--color-primario);
+}
+/* Fin info sala */
+
+/* Horas disponibles */
+.horas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.hora-disponible {
+    padding: 10px;
+    background-color: var(--color-exito);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.hora-disponible:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.hora-no-disponible {
+    padding: 10px;
+    background-color: #ddd;
+    color: #999;
+    border: none;
+    border-radius: 5px;
+    cursor: not-allowed;
+    font-weight: 600;
+}
+/* Fin horas disponibles */
+
+/* Invitados */
+.invitado-card {
+    background: var(--color-fondo);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border-left: 4px solid var(--color-primario);
+}
+
+.invitado-card h4 {
+    margin: 0 0 10px 0;
+    color: var(--color-primario);
+}
+
+.invitado-card input,
+.invitado-card select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+.btn-agregar-invitado {
+    background-color: var(--color-exito);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.btn-agregar-invitado:hover {
+    background-color: #45a049;
+}
+
+.btn-eliminar-invitado {
+    background-color: var(--color-error);
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.btn-eliminar-invitado:hover {
+    background-color: #da190b;
+}
+/* Fin invitados */
+
+/* Botones de navegacion */
+
+.botones-navegacion {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+    justify-content: center;
+}
+
+.btn-volver,
+.btn-siguiente,
+.btn-confirmar {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.btn-volver {
+    background-color: #999;
+    color: white;
+}
+
+.btn-volver:hover {
+    background-color: #777;
+}
+
+.btn-siguiente,
+.btn-confirmar {
+    background-color: var(--color-primario);
+    color: white;
+}
+
+.btn-siguiente:hover,
+.btn-confirmar:hover {
+    background-color: var(--color-secundario);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-siguiente:disabled,
+.btn-confirmar:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Fin botones navegacion */
+
+/* Resumen */
+.resumen-section {
+    background: var(--color-fondo);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border-left: 4px solid var(--color-primario);
+}
+
+.resumen-section h3 {
+    margin-top: 0;
+    color: var(--color-primario);
+}
+
+.resumen-section p {
+    margin: 8px 0;
+}
+
+.resumen-section ul {
+    padding-left: 20px;
+}
+
+.resumen-section li {
+    margin: 5px 0;
+}
+/* Fin resumen */
+
+/* Exito */
+.exito {
+    text-align: center;
+    padding: 40px;
+    background: #e8f5e9;
+    border-radius: 10px;
+}
+
+.exito h2 {
+    color: var(--color-exito);
+    margin-bottom: 20px;
+}
+
+.exito p {
+    font-size: 1.1em;
+    margin: 15px 0;
+    color: var(--color-texto);
+}
+/* Fin exito */
+
+/* Inputs y labels */
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1em;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: 0 0 5px rgba(7, 27, 52, 0.3);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--color-primario);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+h2 {
+    color: var(--color-primario);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+h3 {
+    color: var(--color-primario);
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+h4 {
+    color: var(--color-secundario);
+}
+
+/* Contenedor principal */
+.contenedor-principal {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+/* Fin contenedor principal */
+
+/* ///////////////////////////////////////// */
+/* Fin seccion diseños del apartado Reservas */
+/* ///////////////////////////////////////// */
+
+

@@ -34,7 +34,6 @@ class Reservas(models.Model):
     estado_reserva = models.CharField(max_length=15, choices=estado_opciones, default='PENDIENTE')
     codigo = models.CharField(max_length=50, unique=True, null=True, blank=False)
     rut = models.CharField(max_length=12,blank=False)
-    
     sala_reservada = models.ForeignKey(Salas, on_delete=models.CASCADE)
 
 class Invitados(models.Model):

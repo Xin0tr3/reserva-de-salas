@@ -25,17 +25,29 @@
         <h1> Cancelar Reserva</h1>
     </section>
 
-    <section class="botones">
-    <form action="#">
-        <label for="equip">Ingresa el codigo de tu reserva</label><br>
-        <input type="text" id="equip" name="equip" value="John"><br>
-        <input type="submit" value="Confirmar">
-    </form> 
+    <section id="paso-1" class="paso activo">
+        <label for="codigo-cancelacion">Ingresa el codigo de tu reserva</label><br>
+        <input type="text" id="codigo-cancelacion" name="codigo-cancelacion" placeholder="Ingrese el codigo"><br>
+
+        <div class="botones-navegacion">
+            <button type="button" id="siguiente-paso-1" class="btn-siguiente">Siguiente</button>
+        </div>
     </section>
 
-    <section>
-        <h1> confirma la cancelacion de su reserva </h1>
+    <section id="paso-2" class="paso oculto">
+        <h1> ¿Confirma la cancelacion de su reserva? </h1>
+        <div id="resumen-reserva-cancelar">
+            <!-- Se rellena solo -->
+        </div>
+
+        <div class="botones-navegacion">
+            <button type="button" id="volver-paso-1" class="btn-volver">Volver</button>
+            <button type="button" id="confirmar-cancelacion" class="btn-siguiente">Confirmar</button>
+        </div>
     </section>
+
+<!-- JS -->
+<script src="scripts/cancelar_reserva.js"></script>
 </body>
     
 

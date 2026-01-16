@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -12,7 +13,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 
 <body>
@@ -36,19 +36,24 @@
                 target="_blank">Administrador</a> </li>
     </ul>
     </nav>
+
+
     <div class="contenedor-principal">
         <!-- Seleccionar sala -->
-        <section id="paso-1" class="paso-activo">
+        <section id="paso-1" class="paso activo">
             <h2>Selecciona una sala</h2>
             <div id="contenedor-salas" class="botones">
                 <div class="botones-inicio" id="salas-grid">
                     <!-- Las salas se cargarán aquí dinámicamente -->
                 </div>
             </div>
+            <div class="botones-navegacion">
+                <button type="button" id="siguiente-paso-1" class="btn-siguiente">Siguiente</button>
+            </div>
         </section>
 
         <!-- Seleccionar fecha y hora -->
-        <section id="paso-2" class="oculto">
+        <section id="paso-2" class="paso oculto">
             <h3>Selecciona fecha y hora</h3>
             
             <div id="info-sala" class="info-sala">
@@ -74,7 +79,7 @@
         </section>
 
         <!-- Ingresar datos de la reserva -->
-        <section id="paso-3" class="oculto">
+        <section id="paso-3" class="paso oculto">
             <h3>Ingresa los datos de tu reserva</h3>
             <label for="tevento">Titulo evento:</label><br>
             <input type="text" id="tevento" name="tevento" placeholder="Titulo de tu evento"><br>
@@ -110,7 +115,7 @@
         </section>
 
         <!-- Confirmar reserva -->
-        <section id="paso-4" class="oculto">
+        <section id="paso-4" class="paso oculto">
             <h3>¿Confirmas la reserva?</h3>
             <div id="resumen-reserva">
                 <!-- Se rellena automaticamente -->
@@ -123,11 +128,8 @@
         </section>
     </div>
 
+<!-- JS -->
+<script src="scripts/reserva.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </body>
-
-<script>
-
-</script>
-
 </html>
-
