@@ -26,8 +26,12 @@ function mostrarPaso(numeroPaso){
 }
 
 function configurarEventosNavegacion(){
-    document.getElementById('siguiente-paso-1').addEventListener('click', function(){
-        if (!validarPaso1() || !buscarReserva()){
+    document.getElementById('siguiente-paso-1').addEventListener('click', async function(){
+        if (!validarPaso1()){
+            return;
+        }
+        const resultado = await buscarReserva();
+        if (!resultado){
             return;
         }
         mostrarPaso(2);
@@ -58,6 +62,7 @@ function buscarReserva(){
         method: 'GET'
     })
     .then(response => {
+        console.log('Response status:', response.status);
         if (response.status === 404){
             alert('Reserva no encontrada. Verifique el codigo ingresado.');
             return null;
@@ -69,16 +74,21 @@ function buscarReserva(){
         return response.json();
     })
     .then(reserva =>{
+        console.log('Reserva obtenida:', reserva);
         if (reserva){
-            mostrarResumen(reserva);
-            return true;
+            try{
+                mostrarResumen(reserva);
+                console.log('Resumen mostrado correctamente');
+                return true;
+            } catch (error){
+                console.error('Error en mostrar el resumen:', error);
+                throw error;
+            }
+            
         }
+        alert('No hay respuesta del servidor');
         return false;
     })
-    .catch(error => {
-        alert('Error al buscar la reserva.');
-        return false;
-    });
 }
 
 async function cancelarReserva(){
@@ -98,13 +108,21 @@ async function cancelarReserva(){
 }
 
 function mostrarResumen(reserva){
+    try{
+    const invitadosCount = reserva.invitados ? reserva.invitados.length : 0; 
+
     const resumenHTML = `
-    <p><strong>Sala:</strong>${reserva.sala_reservada.nombre_sala}</p>
-    <p><strong>Evento:</strong>${reserva.nombre_evento}</p>
-    <p><strong>Fecha inicio:</strong>${new Date(reserva.hora_inicio).toLocaleString('es-CL')}</p>
-    <p><strong>Fecha término:</strong>${new Date(reserva.hora_termino).toLocaleString('es-CL')}</p>
-    <p><strong>Reservante:</strong>${reserva.nombre_reservante}</p>
-    <p><strong>Invitados:</strong> ${reserva.invitados.length}</p>
+    <p><strong>Sala: </strong>${reserva.sala_reservada.nombre_sala}</p>
+    <p><strong>Evento: </strong>${reserva.nombre_evento}</p>
+    <p><strong>Fecha inicio: </strong>${new Date(reserva.hora_inicio).toLocaleString('es-CL')}</p>
+    <p><strong>Fecha término: </strong>${new Date(reserva.hora_termino).toLocaleString('es-CL')}</p>
+    <p><strong>Reservante: </strong>${reserva.nombre_reservante}</p>
+    <p><strong>Invitados: </strong> ${invitadosCount}</p>
 `;
     document.getElementById('resumen-reserva-cancelar').innerHTML = resumenHTML;
+    
+    } catch (error){
+        console.error('Error al mostrar el resumen de la reserva:', error);
+        alert('Error al mostrar el resumen de la reserva.');
+    }
 }

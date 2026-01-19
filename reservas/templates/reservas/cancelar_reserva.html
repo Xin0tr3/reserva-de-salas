@@ -1,3 +1,5 @@
+{% load static %}
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -5,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reserva de salas</title>
     <!--CSS-->
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="{% static 'reservas/styles/style.css' %}">
     <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +49,7 @@
     </section>
 
 <!-- JS -->
-<script src="scripts/cancelar_reserva.js"></script>
+<script src="{% static 'reservas/scripts/cancelar_reserva.js' %}"></script>
 </body>
     
 

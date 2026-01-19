@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function cargarSalas() {
-    fetch(`${API_BASE}/salas/`)
+    fetch(`${API_BASE}salas/`)
         .then(response => response.json())
         .then(salaLista => {
             const gridSalas = document.getElementById('salas-grid');
@@ -58,7 +58,7 @@ function seleccionarSala(salaId) {
     estadoReserva.salaData = sala;
     estadoReserva.invitados = []; //Sirve para resetear invitados en caso de cambiar sala
 
-    documentquerySelectorAll('.sala-btn').forEach(btn => {
+    document.querySelectorAll('.sala-btn').forEach(btn => {
         btn.classList.remove('seleccionado');
     });
     document.querySelector(`[data-sala-id="${salaId}"]`).classList.add('seleccionado');
@@ -129,7 +129,7 @@ async function obtenerHorasDisponibles(fechaSeleccionada){
 
         try {
             const response = await fetch(
-                `${API_BASE}/salas/?fecha=${fechaStr}&hora_inicio=${horaInicio}&hora_termino=${horaTermino}`
+                `${API_BASE}salas/?fecha=${fechaStr}&hora_inicio=${horaInicio}&hora_termino=${horaTermino}`
             );
             const salasDisponibles = await response.json();
 
@@ -153,7 +153,7 @@ function mostrarHorasDisponibles(horasDisponibles, horasOcupadas, fechaStr){
     const contenedor = document.getElementById('horas-disponibles');
 
     const fechaObj = new Date(fechaStr);
-    const fechaFormato = fechaObj.toLocateDateString('es-Cl', {
+    const fechaFormato = fechaObj.toLocaleDateString('es-Cl', {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
@@ -313,7 +313,7 @@ function recolectarInvitados(){
 }
 
 function mostrarResumen(){
-    const sala = salaReserva.salaData;
+    const sala = estadoReserva.salaData;
     const resumenHTML = `
     <div class="resumen-section">
         <h3>Informacion de la reserva</h3>
@@ -473,7 +473,7 @@ async function confirmarReserva(){
         nombre_reservante: document.getElementById('nusuario').value,
         departamento: document.getElementById('depto').value,
         email: document.getElementById('correo').value,
-        nombre_evento: documento.getElementById('tevento').value,
+        nombre_evento: document.getElementById('tevento').value,
         descripcion_evento: document.getElementById('devento').value,
         equipamiento_extra: document.getElementById('equip').value,
         rut: document.getElementById('rut').value,
@@ -482,7 +482,7 @@ async function confirmarReserva(){
     };
     
     try {
-        const response = await fetch(`${API_BASE}/reservar/`, {
+        const response = await fetch(`${API_BASE}reservar/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% load static %}
 <html lang="es">
 
 <head>
@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reserva de salas</title>
     <!--CSS-->
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="{% static 'reservas/styles/style.css' %}">
     <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,7 +59,7 @@
             <div id="info-sala" class="info-sala">
                 <p><strong>Sala seleccionada: </strong> <span id="nombre-sala-seleccionada">-</span></p>
                 <p><strong>Capacidad máxima: </strong><span id="capacidad-sala-seleccionada">-</span> personas</p>
-                <p><strong>Horario disponible: </strong><span id="Horario-sala">-</span></p>
+                <p><strong>Horario disponible: </strong><span id="horario-sala">-</span></p>
             </div>
             <label for="fecha-inicio">Fecha y hora de inicio:</label><br>
             <input id="fecha-inicio" type="text" data-id="minMaxTime" placeholder="Seleccione fecha y hora" readonly><br>
@@ -128,8 +128,8 @@
         </section>
     </div>
 
-<!-- JS -->
-<script src="scripts/reserva.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- JS -->
+    <script src="{% static 'reservas/scripts/reserva.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </body>
 </html>

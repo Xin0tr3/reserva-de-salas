@@ -17,7 +17,7 @@ class InvitadoSerializer(serializers.ModelSerializer):
         exclude = ['codigo_reserva']
 
 class ReservaSerializer(serializers.ModelSerializer):
-
+    sala_reservada_lectura = SalaSerializer(source='sala_reservada', read_only=True)
     invitados = InvitadoSerializer(many=True, required=False)
 
     class Meta:
