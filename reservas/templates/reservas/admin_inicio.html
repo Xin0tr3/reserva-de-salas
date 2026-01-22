@@ -1,3 +1,4 @@
+{% load static %}
 <html lang="es">
 
 <head>
@@ -5,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reserva de salas</title>
     <!--CSS-->
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="{% static 'reservas/styles/style.css' %}">
     <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,16 +21,13 @@
 </nav>
 
 <body>
-
-    <section>
-        <h1> ¡Tu reserva esta lista! </h1>
-
-    </section>
-
     <section class="botones">
-        <a href="#">Confirmar</a>
+        <div class="botones-inicio">
+            <a href="#" class="btn-1"> Gestion de salas </a>
+            <a href="#" class="btn-1"> Gestion de reservas </a>
+            <a href="#" class="btn-1"> Gestion de usuarios </a>
+        </div>
     </section>
-
 </body>
     
 

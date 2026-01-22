@@ -1,3 +1,5 @@
+{% load static %}
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -5,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reserva de salas</title>
     <!--CSS-->
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="{% static 'reservas/styles/style.css' %}">
     <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,17 +31,24 @@
                 <path
                     d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
             </svg></li>
-        <li> <a href="#" rel="noopener noreferrer"
-                target="_blank">Administrador</a> </li>
+        <li> <a href="#" rel="noopener noreferrer" target="_blank">Administrador</a> </li>
     </ul>
 </nav>
 
 <body>
-    <section class="botones">
-        <div class="botones-inicio">
-            <a href="#" class="btn-1"> Reservar sala </a>
-            <a href="#" class="btn-1"> Cancelar reserva </a>
-        </div>
+    <h1>Inicio de sesión</h1>
+    <section class="contenedor-inicio-usuario">
+        <form method="POST">
+        {% csrf_token %}
+        <input id="usuario" name="username" class="usuario-input" type="text" placeholder="Usuario">
+        <input id="contraseña" name="password" class="usuario-input" type="password" placeholder="Contraseña">
+
+        {% if error_message %}
+            <p class="error">{{ error_message }}</p>
+        {% endif %}
+
+        <button type="submit" id="iniciar-sesion" class="iniciar-sesion">Iniciar sesión</button>
+        </form>
     </section>
 </body>
     

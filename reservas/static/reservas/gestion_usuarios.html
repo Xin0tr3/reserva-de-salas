@@ -1,35 +1,60 @@
+{% load static %}
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reserva de salas</title>
-    <!--CSS-->
-    <link rel="stylesheet" href="styles/style.css">
-    <!--Google Fonts-->
+    <title>Gestión de Usuarios</title>
+    <link rel="stylesheet" href="{% static 'reservas/styles/style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
 </head>
 
-<nav>
-    <ul>
-        <li> <a class="admin" href="#section1">Administrador</a> </li>
-    </ul>
-</nav>
-
 <body>
+    <nav>
+        <ul>
+            <li> <a class="admin" href="/">Inicio</a> </li>
+        </ul>
+    </nav>
 
-    <section>
-        <h1> Gestionar usuarios</h1>
+    <!-- PASO 1: Lista con paginación -->
+    <section id="paso-1" class="paso activo">
+        <h2>Gestión de Usuarios</h2>
+        <div id="contenedor-usuario">
+            <!-- Se rellena dinámicamente -->
+        </div>
+        <div id="paginacion">
+            <!-- Se rellena dinámicamente -->
+        </div>
     </section>
 
-    <section class="botones">
-        <h1>Super tabla con todas los usuarios</h1>
+    <!-- PASO 2: Detalles/Edición -->
+    <section id="paso-2" class="paso oculto">
+        <h2>Detalles del Usuario</h2>
+        <div id="detalles-usuario">
+            <!-- Se rellena dinámicamente -->
+        </div>
+        <div class="botones-navegacion">
+            <button id="volver-paso-1" class="btn-volver">Volver</button>
+            <button id="guardar-cambios" class="btn-confirmar">Guardar Cambios</button>
+        </div>
     </section>
 
+    <!-- Modal de confirmación -->
+    <div id="modal-confirmacion" class="modal">
+        <div class="modal-contenido">
+            <span id="btn-cerrar-modal" class="cerrar">&times;</span>
+            <h2 id="titulo-modal">¿Confirmas la eliminación?</h2>
+            <div class="botones-modal">
+                <button id="btn-confirmar-eliminar" class="btn-confirmar">Eliminar</button>
+                <button id="btn-cancelar-modal" class="btn-cancelar" onclick="document.getElementById('modal-confirmacion').style.display='none'">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'reservas/scripts/gestion_administrador.js' %}"></script>
 </body>
-    
 
 </html>

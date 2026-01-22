@@ -1,9 +1,15 @@
 from rest_framework import serializers
 from ..models import Salas, Reservas, Invitados
+from django.contrib.auth.models import User
 from django.db.models import Q
 from django.db import transaction
 from ..emails import EnviarEmailConfirmacion
 import secrets
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'is_active']
 
 class SalaSerializer(serializers.ModelSerializer):
     class Meta:

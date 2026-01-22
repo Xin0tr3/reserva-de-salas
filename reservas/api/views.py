@@ -1,5 +1,7 @@
 from ..models import Salas, Reservas, Invitados
-from .serializers import SalaSerializer, ReservaSerializer
+from django.contrib.auth.models import User
+from .serializers import SalaSerializer, ReservaSerializer, UserSerializer
+from ..emails import ImportarCalendarioICalendar
 from datetime import datetime
 from django.db.models import Q
 from rest_framework import status, generics, permissions
@@ -9,6 +11,11 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from openpyxl import Workbook
+
+class UserListaAdminAPIView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated, IsAdminUser]
+    serializer_class = UserSerializer
+    queryset = User.objects.all().order_by('-date_joined')
 
 class SalaDisponiblesAPIView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
@@ -118,4 +125,15 @@ class ExportarInvitadosAPIView(APIView):
         response['Content-Disposition'] = f'attachment; filename="invitados_{reserva.codigo}.xlsx"'
 
         wb.save(response)
+        return response
+
+class DescargarCalendarioAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, codigo):
+        reserva = get_object_or_404(Reservas, codigo=codigo)
+        calendario = ImportarCalendarioICalendar(reserva)
+
+        response = HttpResponse(calendario, content_type='text/calendar')
+        response['Content-Disposition'] = f'attachment; filename="reserva_{codigo}.ics"'
         return response
