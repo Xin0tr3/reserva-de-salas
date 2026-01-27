@@ -50,10 +50,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
 function cargarItems(gestion) {
     const endpoint = CONFIG[gestion].endpoint;
     
-    fetch(endpoint)
+    fetch(endpoint, {credentials: 'include'})
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error, status: ${response.status}`);
@@ -296,7 +311,13 @@ function eliminarItem(id, codigo) {
         `${config.endpoint}${codigo}/` : 
         `${config.endpoint}${id}/`;
 
-    fetch(endpoint, { method: 'DELETE' })
+    fetch(endpoint, {
+        method: 'DELETE',
+        credentials: 'include',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken')
+        }
+        })
         .then(response => {
             if (response.ok) {
                 alert('Item eliminado correctamente');
@@ -378,7 +399,9 @@ function guardarCambios() {
 
     fetch(endpoint, {
         method: 'PATCH',
+        credentials: 'include',
         headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(datos)
